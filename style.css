@@ -1,3 +1,6 @@
+/* ==============================
+   Global & Layout Styles
+============================== */
 * {
   box-sizing: border-box;
 }
@@ -9,9 +12,12 @@ body {
   height: 100vh;
   color: #222;
   background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Sidebar */
+/* ==============================
+   Sidebar
+============================== */
 .sidebar {
   width: 280px;
   background-color: #f8f9fa;
@@ -24,27 +30,24 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 90;
 }
 
-.sidebar.collapsed {
-  transform: translateX(-280px);
-}
-
-/* Sidebar contents */
 .sidebar img {
   display: block;
-  margin: 0 auto 10px;
-  width: 130px;
+  margin: 0 auto 15px;
+  width: 250px;
 }
 
 .sidebar h2 {
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: center;
   color: #555;
   margin: 5px 0 15px;
 }
 
+/* Search box */
 .search-box {
   display: flex;
   align-items: center;
@@ -61,6 +64,7 @@ body {
   background: none;
   flex: 1;
   padding: 4px;
+  font-size: 0.95em;
 }
 
 .search-box i {
@@ -68,6 +72,7 @@ body {
   margin-right: 5px;
 }
 
+/* Sidebar Links */
 .nav-links {
   list-style-type: none;
   padding: 0;
@@ -82,26 +87,22 @@ body {
   color: #0071c5;
   text-decoration: none;
   font-size: 0.95em;
+  transition: color 0.2s;
 }
 
 .nav-links a:hover {
   text-decoration: underline;
+  color: #004b85;
 }
 
-/* Main content */
-.main {
-  flex: 1;
-  margin-left: 280px;
-  overflow-y: auto;
-  position: relative;
-  transition: margin-left 0.3s ease;
+/* Sidebar Hidden State */
+.sidebar.collapsed {
+  transform: translateX(-100%);
 }
 
-.main.expanded {
-  margin-left: 0;
-}
-
-/* Topbar */
+/* ==============================
+   Topbar
+============================== */
 .topbar {
   position: fixed;
   top: 0;
@@ -111,16 +112,19 @@ body {
   border-bottom: 1px solid #ddd;
   padding: 10px 20px;
   display: flex;
+  justify-content: space-between; /* Toggle on left, icons on right */
   align-items: center;
-  gap: 20px;
   z-index: 100;
   transition: left 0.3s ease;
 }
 
+/* When sidebar is collapsed */
+.main.expanded ~ .topbar,
 .sidebar.collapsed ~ .topbar {
   left: 0;
 }
 
+/* Icon Buttons */
 .icon-btn {
   background: none;
   border: none;
@@ -132,6 +136,29 @@ body {
 
 .icon-btn:hover {
   color: #0071c5;
+}
+
+/* Right-side Icon Group */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ==============================
+   Main Content
+============================== */
+.main {
+  flex: 1;
+  margin-left: 280px;
+  overflow-y: auto;
+  position: relative;
+  transition: margin-left 0.3s ease;
+}
+
+/* When sidebar collapsed */
+.main.expanded {
+  margin-left: 0;
 }
 
 .banner {
@@ -168,7 +195,9 @@ h1, h2, h3 {
   color: #666;
 }
 
-/* Dark theme */
+/* ==============================
+   Dark Mode
+============================== */
 body.dark {
   background-color: #1e1e1e;
   color: #e0e0e0;
@@ -190,4 +219,21 @@ body.dark .icon-btn {
 
 body.dark .icon-btn:hover {
   color: #7cc5f4;
+}
+
+body.dark .search-box {
+  background-color: #333;
+  border-color: #555;
+}
+
+body.dark .search-box input {
+  color: #e0e0e0;
+}
+
+body.dark .nav-links a {
+  color: #7cc5f4;
+}
+
+body.dark .nav-links a:hover {
+  color: #a2dcff;
 }
