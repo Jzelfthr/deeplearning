@@ -65,9 +65,35 @@
     /* Main Content */
     .main {
       margin-left: 280px;
-      padding: 40px;
+      padding: 20px 40px;
       overflow-y: auto;
       width: calc(100% - 280px);
+      position: relative;
+    }
+
+    /* Top Bar */
+    .topbar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: calc(100% - 280px);
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+      padding: 8px 20px;
+      z-index: 1000;
+    }
+
+    .topbar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 18px;
+    }
+
+    .topbar button:hover {
+      color: #0071c5;
     }
 
     .banner {
@@ -75,8 +101,9 @@
       background: linear-gradient(90deg, #f58bb3, #7cc5f4);
       color: white;
       border-radius: 10px;
-      padding: 50px 0;
+      padding: 60px 0;
       margin-bottom: 40px;
+      margin-top: 80px;
     }
 
     .banner h1 {
@@ -117,17 +144,45 @@
     .next-link a:hover {
       color: #004b85;
     }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 90px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 4px;
+      position: absolute;
+      z-index: 1;
+      top: 130%;
+      right: 50%;
+      transform: translateX(50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.75em;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <img src="logo.png" alt="Jupyter Book Logo" width="150">
+    <img src="logo.png" alt="Jupyter Book Logo" width="250">
     <h2>DS413 – Elective 4<br>(Deep Learning)</h2>
     <h3>Jupyter Book Compilation</h3>
     <hr>
-    <h4>Laboratory Exercises</h4>
+    <h4>Exercises & Laboratory Tasks</h4>
     <ul>
       <li><a href="labs/Exercise 1.html">Exercise 1</a></li>
       <li><a href="labs/Laboratory_task_1.html">Laboratory Task 1</a></li>
@@ -135,8 +190,28 @@
       <li><a href="labs/Laboratory_Task_3.html">Laboratory Task 3 - Forward & Backward Propagation</a></li>
       <li><a href="labs/Laboratory_task_4.html">Laboratory Task 4 - Linear Regression in PyTorch</a></li>
       <li><a href="labs/Laboratory task 5.html">Laboratory Task 5 - PyTorch Basics</a></li>
-      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6</a></li>
+      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6 - CNN Implementation</a></li>
     </ul>
+  </div>
+
+  <!-- Top Bar Icons -->
+  <div class="topbar">
+    <div class="tooltip">
+      <button onclick="window.open('https://github.com/jzelfthr/deep-learning-portfolio', '_blank')" title="GitHub Repository">💻</button>
+      <span class="tooltiptext">GitHub</span>
+    </div>
+    <div class="tooltip">
+      <button onclick="window.print()" title="Download / Print">⬇️</button>
+      <span class="tooltiptext">Download</span>
+    </div>
+    <div class="tooltip">
+      <button onclick="document.documentElement.requestFullscreen();" title="Fullscreen">🖥️</button>
+      <span class="tooltiptext">Fullscreen</span>
+    </div>
+    <div class="tooltip">
+      <button onclick="location.reload()" title="Refresh">🔄</button>
+      <span class="tooltiptext">Reload</span>
+    </div>
   </div>
 
   <!-- Main Content -->
@@ -161,7 +236,7 @@
       <li>Serve as a professional portfolio demonstrating the frameworks and methods I applied throughout the course.</li>
     </ul>
 
-    <h2>Laboratory Exercises</h2>
+    <h2>Exercises & Laboratory Tasks</h2>
     <ol>
       <li><a href="labs/Exercise 1.html">Exercise 1</a></li>
       <li><a href="labs/Laboratory_task_1.html">Laboratory Task 1</a></li>
@@ -169,7 +244,7 @@
       <li><a href="labs/Laboratory_Task_3.html">Laboratory Task 3 - Implementing Forward and Backward Propagation</a></li>
       <li><a href="labs/Laboratory_task_4.html">Laboratory Task 4 - Training Linear Regression Model in PyTorch</a></li>
       <li><a href="labs/Laboratory task 5.html">Laboratory Task 5 - PyTorch Basics</a></li>
-      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6</a></li>
+      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6 - CNN Implementation</a></li>
     </ol>
 
     <div class="footer">
@@ -177,7 +252,8 @@
       <p><em>DS413 – Elective 4 (Deep Learning)</em></p>
     </div>
 
-    <p class="next-link"><a href="labs/Laboratory_task_1.html">Next → Laboratory Task 1</a></p>
+    <p class="next-link"><a href="labs/Exercise 1.html">Next → Exercise 1</a></p>
   </div>
+
 </body>
 </html>
