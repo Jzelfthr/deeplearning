@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>DS413 – Deep Learning | About This Compilation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <style>
     body {
       margin: 0;
@@ -41,6 +42,31 @@
       font-size: 0.9rem;
       color: #555;
       margin-top: 0;
+    }
+
+    /* Search bar */
+    .search-container {
+      margin: 15px 0 20px;
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+    }
+
+    .search-container input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: none;
+      padding: 6px;
+      font-size: 0.9em;
+    }
+
+    .search-container i {
+      color: #555;
+      margin-right: 5px;
     }
 
     .sidebar ul {
@@ -82,17 +108,22 @@
       text-align: right;
       padding: 8px 20px;
       z-index: 1000;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
     }
 
-    .topbar button {
+    .icon-btn {
       background: none;
       border: none;
       cursor: pointer;
-      margin-left: 10px;
-      font-size: 18px;
+      font-size: 1.2rem;
+      color: #444;
+      transition: color 0.2s ease;
     }
 
-    .topbar button:hover {
+    .icon-btn:hover {
       color: #0071c5;
     }
 
@@ -144,34 +175,6 @@
     .next-link a:hover {
       color: #004b85;
     }
-
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 90px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      padding: 4px;
-      position: absolute;
-      z-index: 1;
-      top: 130%;
-      right: 50%;
-      transform: translateX(50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 0.75em;
-    }
-
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
@@ -182,6 +185,13 @@
     <h2>DS413 – Elective 4<br>(Deep Learning)</h2>
     <h3>Jupyter Book Compilation</h3>
     <hr>
+
+    <!-- Search -->
+    <div class="search-container">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+
     <h4>Exercises & Laboratory Tasks</h4>
     <ul>
       <li><a href="labs/Exercise 1.html">Exercise 1</a></li>
@@ -190,28 +200,24 @@
       <li><a href="labs/Laboratory_Task_3.html">Laboratory Task 3 - Forward & Backward Propagation</a></li>
       <li><a href="labs/Laboratory_task_4.html">Laboratory Task 4 - Linear Regression in PyTorch</a></li>
       <li><a href="labs/Laboratory task 5.html">Laboratory Task 5 - PyTorch Basics</a></li>
-      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6 - CNN Implementation</a></li>
+      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6</a></li>
     </ul>
   </div>
 
-  <!-- Top Bar Icons -->
+  <!-- Top Bar -->
   <div class="topbar">
-    <div class="tooltip">
-      <button onclick="window.open('https://github.com/jzelfthr/deep-learning-portfolio', '_blank')" title="GitHub Repository">💻</button>
-      <span class="tooltiptext">GitHub</span>
-    </div>
-    <div class="tooltip">
-      <button onclick="window.print()" title="Download / Print">⬇️</button>
-      <span class="tooltiptext">Download</span>
-    </div>
-    <div class="tooltip">
-      <button onclick="document.documentElement.requestFullscreen();" title="Fullscreen">🖥️</button>
-      <span class="tooltiptext">Fullscreen</span>
-    </div>
-    <div class="tooltip">
-      <button onclick="location.reload()" title="Refresh">🔄</button>
-      <span class="tooltiptext">Reload</span>
-    </div>
+    <button class="icon-btn" onclick="window.open('https://github.com/jzelfthr/deep-learning-portfolio', '_blank')" title="GitHub">
+      <i class="bi bi-github"></i>
+    </button>
+    <button class="icon-btn" onclick="window.print()" title="Download / Print">
+      <i class="bi bi-download"></i>
+    </button>
+    <button class="icon-btn" onclick="document.documentElement.requestFullscreen();" title="Fullscreen">
+      <i class="bi bi-arrows-fullscreen"></i>
+    </button>
+    <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">
+      <i class="bi bi-circle-half"></i>
+    </button>
   </div>
 
   <!-- Main Content -->
@@ -244,7 +250,7 @@
       <li><a href="labs/Laboratory_Task_3.html">Laboratory Task 3 - Implementing Forward and Backward Propagation</a></li>
       <li><a href="labs/Laboratory_task_4.html">Laboratory Task 4 - Training Linear Regression Model in PyTorch</a></li>
       <li><a href="labs/Laboratory task 5.html">Laboratory Task 5 - PyTorch Basics</a></li>
-      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6 - CNN Implementation</a></li>
+      <li><a href="labs/Laboratory_task_6.html">Laboratory Task 6</a></li>
     </ol>
 
     <div class="footer">
@@ -252,8 +258,21 @@
       <p><em>DS413 – Elective 4 (Deep Learning)</em></p>
     </div>
 
-    <p class="next-link"><a href="labs/Exercise 1.html">Next → Exercise 1</a></p>
+    <p class="next-link"><a href="exercises/Exercise 1.html">Next → Exercise 1</a></p>
   </div>
 
+  <script>
+    // Theme toggle (light/dark)
+    function toggleTheme() {
+      const current = document.body.style.backgroundColor;
+      if (current === 'rgb(34, 34, 34)') {
+        document.body.style.backgroundColor = '#fafafa';
+        document.body.style.color = '#222';
+      } else {
+        document.body.style.backgroundColor = '#222';
+        document.body.style.color = '#fafafa';
+      }
+    }
+  </script>
 </body>
 </html>
